@@ -13,3 +13,5 @@ const kgreen = Color(0xff6DC54A);
 const kpink = Color(0xffEA2027);
 const dashback = Color(0xff34495e);
 const boxcl = Color(0xff30336b);
+const Cblue = Color(0xff3498db);
+const Pblue = Color(0xff54a0ff);

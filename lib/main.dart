@@ -1,19 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:inventry_management_app/screens/main_screen.dart';
-import 'package:inventry_management_app/screens/splash_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:inventry_management_app/screens/home_screen/home_screen.dart';
 
-import 'providers/home/bottom_nav_provider.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => BottomNavProvider()),
-    ],
-    child: MyApp(),
-  ));
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const HomeScreen(),
     );
   }
 }
