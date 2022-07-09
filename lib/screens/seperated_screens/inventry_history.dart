@@ -13,6 +13,9 @@ class _InventryHistoryState extends State<InventryHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Inventry History"),
+      ),
       body: Container(),
     );
   }

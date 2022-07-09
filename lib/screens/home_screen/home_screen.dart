@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               text: 'Rooms',
               icon: Icons.room,
               onTap: () {
-                UtilFunction.navigateTo(context, RoomsScreen());
+                UtilFunction.navigateTo(context, RoomSceern());
               }),
         ],
       ),
@@ -102,14 +102,34 @@ class CustomContainer extends StatelessWidget {
         height: 75,
         width: size.width,
         alignment: Alignment.centerLeft,
-        color: kwhite,
         margin: const EdgeInsets.all(15.0),
         padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: kwhite,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: Cblue,
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Icon(
+                icon,
+                color: kwhite,
+              ),
+              decoration: BoxDecoration(
+                  color: Cblue,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+            ),
+            SizedBox(
+              width: 10,
             ),
             CustomText(
               text: text,

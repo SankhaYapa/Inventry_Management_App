@@ -13,6 +13,9 @@ class _WeeklyInventryCountState extends State<WeeklyInventryCount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Weekly Inventry Count"),
+      ),
       body: Container(),
     );
   }

@@ -24,7 +24,7 @@ class CustomTextField extends StatelessWidget {
             hintText: hintText,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.white)),
+                borderSide: BorderSide(color: Color.fromARGB(255, 69, 67, 67))),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.red))),

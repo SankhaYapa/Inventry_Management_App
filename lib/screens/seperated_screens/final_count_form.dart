@@ -13,6 +13,9 @@ class _FinalCountFormState extends State<FinalCountForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Final Count Form"),
+      ),
       body: Container(),
     );
   }
