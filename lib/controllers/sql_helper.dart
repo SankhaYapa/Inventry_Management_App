@@ -1,3 +1,4 @@
+import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/model/room_model.dart';
 import 'package:responsive_framework/utils/responsive_utils.dart';
 import 'package:sqflite/sqflite.dart';
@@ -21,13 +22,14 @@ class SqlHelper {
 
   //create table
   static Future<void> createTables(Database database) async {
-    await database.execute("""
-CREATE TABLE Rooms(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  rname TEXT
-  createAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-)
-""");
+    try {
+      await database.execute(
+          "CREATE TABLE Rooms(id INTEGER PRIMARY KEY AUTOINCREMENT,rname TEXT,createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+      await database.execute(
+          "CREATE TABLE Items(id INTEGER PRIMARY KEY AUTOINCREMENT,iname TEXT,createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+    } catch (e) {
+      print(e);
+    }
   }
 
   //,,,,,,,,,,,,,,insert room,,,,,,,,,,//
@@ -52,13 +54,67 @@ CREATE TABLE Rooms(
   }
 
   //,,,,,,,,update room,,,,,//
-  static Future<int> updateRoom(String rname) async {
+  static Future<int> updateRoom(int id, String rname) async {
     final db = await initDB();
 
-    final data = {'rname': rname};
+    final data = {'rname': rname, 'createdAt': DateTime.now().toString()};
+//,,,,,,using whereArgs to prevent sql injection
+    final resultid =
+        await db.update('Rooms', data, where: "id=?", whereArgs: [id]);
+    return resultid;
+  }
 
-    final id = await db.insert('Rooms', data,
+  //,,,,,,,,delete room,,,,,//
+  static Future<void> deleteRoom(int id) async {
+    final db = await initDB();
+
+//,,,,,,using whereArgs to prevent sql injection
+
+    await db.delete('Rooms', where: "id=?", whereArgs: [id]);
+  }
+
+//////////////////////////////////////////////////////////////
+  //,,,,,,,,,,,,,,insert item,,,,,,,,,,//
+  static Future<int> createItem(String iname) async {
+    final db = await initDB();
+
+    final data = {'iname': iname};
+
+    final id = await db.insert('Items', data,
         conflictAlgorithm: ConflictAlgorithm.replace);
     return id;
   }
+
+  //,,,,,,,,,,,,read all Items from the item table
+  static Future<List<ItemModel>> getItems() async {
+    final db = await initDB();
+    //fetch rooms
+    final result = await db.query('Items', orderBy: "id");
+
+    //mapping fetch data to notes model and return
+    return result.map((e) => ItemModel.fromJson(e)).toList();
+  }
+
+  //,,,,,,,,update item,,,,,//
+  static Future<int> updateItem(int id, String iname) async {
+    final db = await initDB();
+
+    final data = {'iname': iname, 'createdAt': DateTime.now().toString()};
+//,,,,,,using whereArgs to prevent sql injection
+    final resultid =
+        await db.update('Items', data, where: "id=?", whereArgs: [id]);
+    return resultid;
+  }
+
+  //,,,,,,,,delete item,,,,,//
+  static Future<void> deleteItem(int id) async {
+    final db = await initDB();
+
+//,,,,,,using whereArgs to prevent sql injection
+
+    await db.delete('Items', where: "id=?", whereArgs: [id]);
+  }
+
+  //,,,,,,get rooms,,,,,,//
+
 }

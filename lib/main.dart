@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/screens/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+
+import 'providers/home/item_provide.dart';
 
 void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(
         create: (context) => RoomProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ItemProvider(),
       )
     ], child: const MyApp()),
   );
@@ -26,6 +32,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomeScreen(),
+      builder: (context, widget) => ResponsiveWrapper.builder(widget,
+          maxWidth: 1200,
+          minWidth: 480,
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(480, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+          ],
+          background: Container(color: Color(0xFFF5F5F5))),
     );
   }
 }

@@ -15,3 +15,4 @@ const dashback = Color(0xff34495e);
 const boxcl = Color(0xff30336b);
 const Cblue = Color(0xff3498db);
 const Pblue = Color(0xff54a0ff);
+const Upurpule = Color(0xff575fcf);
