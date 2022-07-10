@@ -27,7 +27,8 @@ class RoomCard extends StatelessWidget {
           child: Row(
             children: [
               IconButton(
-                  onPressed: () => Utils.showForm(context, model),
+                  //onPressed: () => Utils.showForm(context, model),
+                  onPressed: () {},
                   icon: Icon(Icons.edit)),
               IconButton(
                   onPressed: () {

@@ -6,6 +6,7 @@ import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:inventry_management_app/utils/dialogs.dart';
 import 'package:inventry_management_app/utils/dialogs_items.dart';
+import 'package:inventry_management_app/utils/new_show_form.dart';
 import 'package:provider/provider.dart';
 
 class ItemCard extends StatelessWidget {
@@ -30,7 +31,8 @@ class ItemCard extends StatelessWidget {
           child: Row(
             children: [
               IconButton(
-                  onPressed: () => UtilsItems.showForm(context, model),
+                  //onPressed: () => UtilsItems.showForm(context, model),
+                  onPressed: () => ShowForms.showForm(context, model, null),
                   icon: Icon(Icons.edit)),
               IconButton(
                   onPressed: () {

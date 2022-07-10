@@ -26,8 +26,11 @@ class SqlHelper {
     try {
       await database.execute(
           "CREATE TABLE Rooms(id INTEGER PRIMARY KEY AUTOINCREMENT,rname TEXT,createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
-      await database.execute(
-          "CREATE TABLE Items(id INTEGER PRIMARY KEY AUTOINCREMENT,iname TEXT,createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+      await database.execute("""CREATE TABLE Items(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            iname TEXT,
+            mesure TEXT,
+            createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)""");
     } catch (e) {
       print(e);
     }
@@ -76,13 +79,16 @@ class SqlHelper {
 
 //////////////////////////////////////////////////////////////
   //,,,,,,,,,,,,,,insert item,,,,,,,,,,//
-  static Future<int> createItem(String iname) async {
+  static Future<int> createItem(String iname, String selectalue) async {
     final db = await initDB();
 
-    final data = {'iname': iname};
+    // final data = {'iname': iname};
+    // final data2 = {'mesure': selectalue};
+    final data = {'iname': iname, 'mesure': selectalue};
 
     final id = await db.insert('Items', data,
         conflictAlgorithm: ConflictAlgorithm.replace);
+
     return id;
   }
 
@@ -97,10 +103,15 @@ class SqlHelper {
   }
 
   //,,,,,,,,update item,,,,,//
-  static Future<int> updateItem(int id, String iname) async {
+  static Future<int> updateItem(int id, String iname, String mes) async {
     final db = await initDB();
+    //final data = {'iname': iname, 'mesure': selectalue};
 
-    final data = {'iname': iname, 'createdAt': DateTime.now().toString()};
+    final data = {
+      'iname': iname,
+      'mesure': mes,
+      'createdAt': DateTime.now().toString(),
+    };
 //,,,,,,using whereArgs to prevent sql injection
     final resultid =
         await db.update('Items', data, where: "id=?", whereArgs: [id]);
