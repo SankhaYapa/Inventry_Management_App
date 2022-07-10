@@ -1,5 +1,6 @@
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/model/room_model.dart';
+import 'package:logger/logger.dart';
 import 'package:responsive_framework/utils/responsive_utils.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -116,5 +117,12 @@ class SqlHelper {
   }
 
   //,,,,,,get rooms,,,,,,//
+  static Future<void> selecRoom(int id) async {
+    final db = await initDB();
 
+//,,,,,,using whereArgs to prevent sql injection
+
+    final d = await db.query('select*from Rooms');
+    Logger().e(d);
+  }
 }
