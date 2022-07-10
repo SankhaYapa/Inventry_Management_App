@@ -35,6 +35,12 @@ class RoomProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //get items
+  Future<void> refreshItems() async {
+    _allRooms = await SqlHelper.getRooms();
+    notifyListeners();
+  }
+
   //,,,,,,,,,,,,set text controllers when update
   void setTextControllers(RoomModel model) {
     _rnameController.text = model.rname;

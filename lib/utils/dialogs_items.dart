@@ -48,6 +48,7 @@ class UtilsItems {
                             controller: value.inameController,
                             hintText: 'Item Name',
                           ),
+
                           // Container(
                           //   padding: EdgeInsets.all(20),
                           //   decoration: BoxDecoration(
@@ -128,7 +129,8 @@ class UtilsItems {
                                 onPressed: () async {
                                   //save new room if model is null
                                   if (model == null) {
-                                    await value.addNewItem(context);
+                                    await value.addNewItem(
+                                        context, value.toString());
                                   } else {
                                     //update the room if model is not null
                                     await value.updateItem(context, model.id!);
