@@ -32,7 +32,9 @@ class ItemCard extends StatelessWidget {
             children: [
               IconButton(
                   //onPressed: () => UtilsItems.showForm(context, model),
-                  onPressed: () => ShowForms.showForm(context, model, null),
+                  onPressed: () {
+                    ShowForms.showForm(context, model, null);
+                  },
                   icon: Icon(Icons.edit)),
               IconButton(
                   onPressed: () {

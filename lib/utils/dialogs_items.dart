@@ -133,7 +133,8 @@ class UtilsItems {
                                         context, value.toString());
                                   } else {
                                     //update the room if model is not null
-                                    await value.updateItem(context, model.id!);
+                                    await value.updateItem(context, model.id!,
+                                        model.measurement.toString());
                                   }
 
                                   //when update close the bottom sheet

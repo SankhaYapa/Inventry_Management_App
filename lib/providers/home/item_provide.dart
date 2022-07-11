@@ -44,16 +44,15 @@ class ItemProvider extends ChangeNotifier {
   void setTextControllers(ItemModel model) {
     _inameController.text = model.iname;
     _selectValue = model.measurement;
-    print(model.measurement);
 
     notifyListeners();
   }
 
   //Update item function
-  Future<void> updateItem(BuildContext context, int id) async {
+  Future<void> updateItem(
+      BuildContext context, int id, String selectNewValue) async {
     //update the room
-    await SqlHelper.updateItem(
-        id, _inameController.text, _selectValue.toString());
+    await SqlHelper.updateItem(id, _inameController.text, selectNewValue);
 
     _inameController.clear();
     //refresh rooms

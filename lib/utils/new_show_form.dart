@@ -55,7 +55,7 @@ class ShowForms {
                                       ))
                                   .toList(),
                               onChanged: (val) {
-                                selectvalue = val as String;
+                                selectvalue = val.toString();
                               },
                               icon: Icon(Icons.arrow_drop_down_circle,
                                   color: Cblue),
@@ -93,7 +93,12 @@ class ShowForms {
                                         context, selectvalue.toString());
                                   } else {
                                     //update the room if model is not null
-                                    await value.updateItem(context, model.id!);
+
+                                    await value.updateItem(
+                                      context,
+                                      model.id!,
+                                      selectvalue.toString(),
+                                    );
                                   }
 
                                   //when update close the bottom sheet
