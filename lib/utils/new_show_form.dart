@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventry_management_app/components/custome_textfield.dart';
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
+import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +88,7 @@ class ShowForms {
                                                 BorderRadius.circular(10),
                                             side: BorderSide(color: Cblue)))),
                                 onPressed: () async {
-                                  //save new room if model is null
+                                  //save new item if model is null
                                   if (model == null) {
                                     await value.addNewItem(
                                         context, selectvalue.toString());

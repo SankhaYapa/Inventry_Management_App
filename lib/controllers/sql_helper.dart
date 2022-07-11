@@ -127,13 +127,15 @@ class SqlHelper {
     await db.delete('Items', where: "id=?", whereArgs: [id]);
   }
 
-  //,,,,,,get rooms,,,,,,//
-  static Future<void> selecRoom(int id) async {
-    final db = await initDB();
+  //,,,,,,,,,,,,read all Items from the item table Lastweek
+  // static Future<List<ItemModel>> getItemsLastWeek() async {
+  //   final db = await initDB();
+  //   //fetch rooms
+  //   final result = await db.query('Items', where: "iname=sankha");
 
-//,,,,,,using whereArgs to prevent sql injection
+  //   Logger().e(result);
 
-    final d = await db.query('select*from Rooms');
-    Logger().e(d);
-  }
+  //   //mapping fetch data to notes model and return
+  //   return result.map((e) => ItemModel.fromJson(e)).toList();
+  // }
 }

@@ -163,8 +163,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
                   physics: BouncingScrollPhysics(),
                   itemCount: value.allItems.length,
                   itemBuilder: (context, index) => ItemCard(
-                      // rname: value.allRooms[index].rname,
-                      model: value.allItems[index]),
+                    // rname: value.allRooms[index].rname,
+                    model: value.allItems[index],
+                  ),
                 );
         },
       ),

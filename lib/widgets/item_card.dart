@@ -26,6 +26,9 @@ class ItemCard extends StatelessWidget {
           model.iname,
           style: TextStyle(fontSize: 16, color: kwhite),
         ),
+        subtitle: Text(
+          model.measurement.toString(),
+        ),
         trailing: SizedBox(
           width: 100,
           child: Row(
