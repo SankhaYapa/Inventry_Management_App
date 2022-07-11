@@ -29,14 +29,14 @@ class _ItemsScreenState extends State<ItemsScreen> {
   SqlHelper sqlHelper = SqlHelper();
 
   _ItemsScreenState() {
-    selectvalue = items[0];
+    //selectvalue = items[0];
   }
   final items = [
     'lbs',
     'gal',
     'pouch',
   ];
-  String? selectvalue = "";
+  //String? selectvalue = "";
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
         Provider.of<RoomProvider>(context, listen: false).allRooms;
     Provider.of<RoomProvider>(context, listen: false).clearRoomList();
     for (int i = 0; i < allRooms.length; i++) {
-      print(allRooms[i].rname);
+      //print(allRooms[i].rname);
       Provider.of<RoomProvider>(context, listen: false)
           .setRoomList(allRooms[i].rname);
     }
@@ -182,8 +182,10 @@ class _ItemsScreenState extends State<ItemsScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         //onPressed: () => showForm(context, null,),
-        onPressed: () =>
-            ShowForms.showForm(context, null, selectvalue.toString()),
+        onPressed: () => ShowForms.showForm(
+          context,
+          null,
+        ),
         icon: Icon(Icons.add),
         label: Text('Add Items'),
       ),

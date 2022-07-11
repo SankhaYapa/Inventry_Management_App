@@ -14,14 +14,16 @@ class ItemProvider extends ChangeNotifier {
   TextEditingController get inameController => _inameController;
 
   //create new note function
-  Future<void> addNewItem(BuildContext context, String selectValue) async {
+  Future<void> addNewItem(
+      BuildContext context, String selectValue, String selectValueR) async {
     //showing a snackbar if title empty
     if (_inameController.text.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Fill the field")));
     }
 
-    await SqlHelper.createItem(_inameController.text, selectValue);
+    await SqlHelper.createItem(
+        _inameController.text, selectValue, selectValueR);
     //refresh rooms
     await refreshItems();
     _inameController.clear();
@@ -51,10 +53,19 @@ class ItemProvider extends ChangeNotifier {
 
   String? _selectValue;
   String? get getSelectValue => _selectValue;
+
+  String? _selectValueR;
+  String? get getSelectValueR => _selectValueR;
+
   //,,,,,,,,,,,,set text controllers when update
   void setTextControllers(ItemModel model) {
     _inameController.text = model.iname;
     _selectValue = model.measurement;
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    _selectValueR = model.room;
+    // print(model.iname);
+    // print(model.measurement);
+    // print(model.id);
 
     notifyListeners();
   }
