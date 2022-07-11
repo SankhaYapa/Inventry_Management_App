@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventry_management_app/providers/home/counter_provider.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/screens/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (context) => ItemProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => CounterProvider(),
       )
     ], child: const MyApp()),
   );

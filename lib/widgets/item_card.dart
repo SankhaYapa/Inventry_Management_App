@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventry_management_app/components/custome_textfield.dart';
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/model/room_model.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
@@ -19,6 +20,7 @@ class ItemCard extends StatelessWidget {
   final ItemModel model;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Card(
       color: Colors.blue,
       child: ListTile(

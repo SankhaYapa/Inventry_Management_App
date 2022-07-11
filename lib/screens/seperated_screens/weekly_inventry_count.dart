@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:inventry_management_app/components/custome_textfield.dart';
 import 'package:inventry_management_app/widgets/item_card.dart';
+import 'package:inventry_management_app/widgets/weekly_inventry_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/home/item_provide.dart';
@@ -29,7 +30,7 @@ class _WeeklyInventryCountState extends State<WeeklyInventryCount> {
                   padding: EdgeInsets.all(10),
                   physics: BouncingScrollPhysics(),
                   itemCount: value.allItems.length,
-                  itemBuilder: (context, index) => ItemCard(
+                  itemBuilder: (context, index) => WeeklyInventryCard(
                     // rname: value.allRooms[index].rname,
                     model: value.allItems[index],
                   ),
