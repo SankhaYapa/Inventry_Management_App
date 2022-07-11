@@ -4,6 +4,7 @@ import 'package:inventry_management_app/controllers/sql_helper.dart';
 
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/model/room_model.dart';
+import 'package:logger/logger.dart';
 
 class ItemProvider extends ChangeNotifier {
   //,,,,,,,,,,,,,add new note
@@ -24,19 +25,29 @@ class ItemProvider extends ChangeNotifier {
     //refresh rooms
     await refreshItems();
     _inameController.clear();
+    _selectValue = null;
 
     notifyListeners();
   }
 
-  //fetch all rooms
+  //fetch all items
   List<ItemModel> _allItems = [];
   List<ItemModel> get allItems => _allItems;
 
-  //get rooms
+  //get items
   Future<void> refreshItems() async {
     _allItems = await SqlHelper.getItems();
     notifyListeners();
   }
+
+  // List<ItemModel> _allItems1 = [];
+  // List<ItemModel> get allItems1 => _allItems1;
+  // //get items Last week
+  // Future<void> refreshItems1() async {
+  //   _allItems1 = await SqlHelper.getItemsLastWeek();
+
+  //   notifyListeners();
+  // }
 
   String? _selectValue;
   String? get getSelectValue => _selectValue;
@@ -50,9 +61,9 @@ class ItemProvider extends ChangeNotifier {
 
   //Update item function
   Future<void> updateItem(
-      BuildContext context, int id, String selectNewValue) async {
+      BuildContext context, int id, String selectvalue) async {
     //update the room
-    await SqlHelper.updateItem(id, _inameController.text, selectNewValue);
+    await SqlHelper.updateItem(id, _inameController.text, selectvalue);
 
     _inameController.clear();
     //refresh rooms

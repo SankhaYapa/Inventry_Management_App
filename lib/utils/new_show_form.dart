@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventry_management_app/components/custome_textfield.dart';
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
+import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -68,6 +69,32 @@ class ShowForms {
                                             Color.fromARGB(255, 40, 40, 40))),
                               )),
                           SizedBox(
+                            height: 20,
+                          ),
+                          DropdownButtonFormField(
+                              value: Provider.of<ItemProvider>(context,
+                                      listen: false)
+                                  .getSelectValue,
+                              items: items
+                                  .map((e) => DropdownMenuItem(
+                                        child: Text(e),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (val) {
+                                selectvalue = val.toString();
+                              },
+                              icon: Icon(Icons.arrow_drop_down_circle,
+                                  color: Cblue),
+                              decoration: InputDecoration(
+                                labelText: "Select Room",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 40, 40, 40))),
+                              )),
+                          SizedBox(
                             height: 70,
                           ),
                           SizedBox(
@@ -87,18 +114,14 @@ class ShowForms {
                                                 BorderRadius.circular(10),
                                             side: BorderSide(color: Cblue)))),
                                 onPressed: () async {
-                                  //save new room if model is null
+                                  //save new item if model is null
                                   if (model == null) {
                                     await value.addNewItem(
                                         context, selectvalue.toString());
                                   } else {
                                     //update the room if model is not null
-
-                                    await value.updateItem(
-                                      context,
-                                      model.id!,
-                                      selectvalue.toString(),
-                                    );
+                                    await value.updateItem(context, model.id!,
+                                        selectvalue.toString());
                                   }
 
                                   //when update close the bottom sheet

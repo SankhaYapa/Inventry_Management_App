@@ -10,7 +10,7 @@ import 'package:inventry_management_app/controllers/sql_helper.dart';
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
-import 'package:inventry_management_app/utils/dialogs_items.dart';
+
 import 'package:inventry_management_app/utils/new_show_form.dart';
 import 'package:inventry_management_app/widgets/item_card.dart';
 import 'package:provider/provider.dart';
@@ -163,8 +163,9 @@ class _ItemsScreenState extends State<ItemsScreen> {
                   physics: BouncingScrollPhysics(),
                   itemCount: value.allItems.length,
                   itemBuilder: (context, index) => ItemCard(
-                      // rname: value.allRooms[index].rname,
-                      model: value.allItems[index]),
+                    // rname: value.allRooms[index].rname,
+                    model: value.allItems[index],
+                  ),
                 );
         },
       ),
