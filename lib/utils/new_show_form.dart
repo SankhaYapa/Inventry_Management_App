@@ -14,9 +14,13 @@ class ShowForms {
     'pouch',
   ];
   static void showForm(
-      BuildContext context, ItemModel? model, String? selectvalue) {
-    selectvalue =
+    BuildContext context,
+    ItemModel? model,
+  ) {
+    String? selectvalue =
         Provider.of<ItemProvider>(context, listen: false).getSelectValue;
+    String? selectvalueR =
+        Provider.of<ItemProvider>(context, listen: false).getSelectValueR;
     //set the existing rooms name to the text controllers
     if (model != null) {
       Provider.of<ItemProvider>(context, listen: false)
@@ -47,37 +51,35 @@ class ShowForms {
                             height: 20,
                           ),
                           DropdownButtonFormField(
-                              value: Provider.of<ItemProvider>(context,
-                                      listen: false)
-                                  .getSelectValue,
-                              items: items
-                                  .map((e) => DropdownMenuItem(
-                                        child: Text(e),
-                                        value: e,
-                                      ))
-                                  .toList(),
-                              onChanged: (val) {
-                                selectvalue = val.toString();
-                              },
-                              icon: Icon(Icons.arrow_drop_down_circle,
-                                  color: Cblue),
-                              decoration: InputDecoration(
-                                labelText: "Select Masure",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 40, 40, 40))),
-                              )),
+                            value: value.getSelectValue,
+                            items: items
+                                .map((e) => DropdownMenuItem(
+                                      child: Text(e),
+                                      value: e,
+                                    ))
+                                .toList(),
+                            onChanged: (val) {
+                              selectvalue = val.toString();
+                            },
+                            icon: Icon(Icons.arrow_drop_down_circle,
+                                color: Cblue),
+                            decoration: InputDecoration(
+                              labelText: "Select Masure",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                      color: Color.fromARGB(255, 40, 40, 40))),
+                            ),
+                          ),
                           SizedBox(
                             height: 20,
                           ),
                           Consumer<RoomProvider>(
                             builder: (context, value3, child) {
                               return DropdownButtonFormField(
-                                  // value: Provider.of<ItemProvider>(context,
-                                  //         listen: false)
-                                  //     .getSelectValue,
+                                  value: Provider.of<ItemProvider>(context,
+                                          listen: false)
+                                      .getSelectValueR,
                                   items: value3.romms
                                       .map((e) => DropdownMenuItem(
                                             child: Text(e),
@@ -85,7 +87,8 @@ class ShowForms {
                                           ))
                                       .toList(),
                                   onChanged: (val) {
-                                    selectvalue = val.toString();
+                                    selectvalueR = val.toString();
+
                                     //print(SqlHelper.getRooms());
                                     // value3.refreshRooms();
                                     // print(value3.allRooms);
@@ -135,7 +138,9 @@ class ShowForms {
                                   //save new item if model is null
                                   if (model == null) {
                                     await value.addNewItem(
-                                        context, selectvalue.toString());
+                                        context,
+                                        selectvalue.toString(),
+                                        selectvalueR.toString());
                                   } else {
                                     //update the room if model is not null
                                     await value.updateItem(context, model.id!,
