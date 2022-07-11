@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventry_management_app/components/custome_textfield.dart';
+import 'package:inventry_management_app/controllers/sql_helper.dart';
 import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
@@ -56,7 +57,7 @@ class ShowForms {
                                       ))
                                   .toList(),
                               onChanged: (val) {
-                                selectvalue = val as String;
+                                selectvalue = val.toString();
                               },
                               icon: Icon(Icons.arrow_drop_down_circle,
                                   color: Cblue),
@@ -68,6 +69,49 @@ class ShowForms {
                                         color:
                                             Color.fromARGB(255, 40, 40, 40))),
                               )),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Consumer<RoomProvider>(
+                            builder: (context, value3, child) {
+                              return DropdownButtonFormField(
+                                  // value: Provider.of<ItemProvider>(context,
+                                  //         listen: false)
+                                  //     .getSelectValue,
+                                  items: value3.romms
+                                      .map((e) => DropdownMenuItem(
+                                            child: Text(e),
+                                            value: e,
+                                          ))
+                                      .toList(),
+                                  onChanged: (val) {
+                                    selectvalue = val.toString();
+                                    //print(SqlHelper.getRooms());
+                                    // value3.refreshRooms();
+                                    // print(value3.allRooms);
+
+                                    //print(value3.allRooms[1].rname);
+
+                                    // for (int i = 0;
+                                    //     i < value3.allRooms.length;
+                                    //     i++) {
+                                    //   print(value3.allRooms[i].rname);
+                                    //   value3.setRoomList(
+                                    //       value3.allRooms[i].rname);
+                                    // }
+                                  },
+                                  icon: Icon(Icons.arrow_drop_down_circle,
+                                      color: Cblue),
+                                  decoration: InputDecoration(
+                                    labelText: "Select Room",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                            color: Color.fromARGB(
+                                                255, 40, 40, 40))),
+                                  ));
+                            },
+                          ),
                           SizedBox(
                             height: 70,
                           ),

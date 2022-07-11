@@ -55,7 +55,6 @@ class ItemProvider extends ChangeNotifier {
   void setTextControllers(ItemModel model) {
     _inameController.text = model.iname;
     _selectValue = model.measurement;
-    print(model.measurement);
 
     notifyListeners();
   }

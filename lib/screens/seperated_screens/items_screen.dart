@@ -8,6 +8,7 @@ import 'package:inventry_management_app/components/custom_text.dart';
 import 'package:inventry_management_app/components/custome_textfield.dart';
 import 'package:inventry_management_app/controllers/sql_helper.dart';
 import 'package:inventry_management_app/model/item_mode.dart';
+import 'package:inventry_management_app/model/room_model.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 
@@ -41,6 +42,16 @@ class _ItemsScreenState extends State<ItemsScreen> {
   void initState() {
     // TODO: implement initState
     Provider.of<ItemProvider>(context, listen: false).refreshItems();
+    Provider.of<RoomProvider>(context, listen: false).refreshRooms();
+    List<RoomModel> allRooms =
+        Provider.of<RoomProvider>(context, listen: false).allRooms;
+    Provider.of<RoomProvider>(context, listen: false).clearRoomList();
+    for (int i = 0; i < allRooms.length; i++) {
+      print(allRooms[i].rname);
+      Provider.of<RoomProvider>(context, listen: false)
+          .setRoomList(allRooms[i].rname);
+    }
+
     super.initState();
   }
 

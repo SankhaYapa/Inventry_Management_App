@@ -13,7 +13,16 @@ import 'package:inventry_management_app/widgets/room_card.dart';
 import 'package:provider/provider.dart';
 
 class RoomSceern extends StatefulWidget {
-  const RoomSceern({Key? key}) : super(key: key);
+  final List<String> items = [
+    'Select a Room',
+    'Room 1',
+    'Room 2',
+    'Room 3',
+    'Room 4',
+  ];
+  String value = 'Select a Room';
+
+  RoomSceern({Key? key}) : super(key: key);
 
   @override
   State<RoomSceern> createState() => _RoomSceernState();
@@ -27,11 +36,6 @@ class _RoomSceernState extends State<RoomSceern> {
     super.initState();
   }
 
-  // DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-  //     value: item,
-  //     child: Text(
-  //       item,
-  //     ));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
