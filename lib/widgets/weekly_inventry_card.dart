@@ -8,11 +8,12 @@ import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:inventry_management_app/utils/dialogs.dart';
+import 'package:inventry_management_app/utils/dialogs_quantity.dart';
 
 import 'package:inventry_management_app/utils/new_show_form.dart';
 import 'package:provider/provider.dart';
 
-class WeeklyInventryCard extends StatefulWidget {
+class WeeklyInventryCard extends StatelessWidget {
   const WeeklyInventryCard({
     Key? key,
     //required this.rname,
@@ -20,71 +21,46 @@ class WeeklyInventryCard extends StatefulWidget {
   }) : super(key: key);
   //
   final ItemModel model;
-
-  @override
-  State<WeeklyInventryCard> createState() => _WeeklyInventryCardState();
-}
-
-class _WeeklyInventryCardState extends State<WeeklyInventryCard> {
-  int _itemsCount = 0;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Card(
-        color: Colors.blue,
-        child: Consumer<CounterProvider>(
-          builder: (context, value, child) {
-            return ListTile(
-              title: Text(
-                widget.model.iname,
-                style: TextStyle(fontSize: 20, color: kwhite),
-              ),
-              // subtitle: Text(
-              //   model.measurement.toString(),
-              // ),
-              trailing: _bultdTrailingWidget(context),
-            );
-          },
-        ));
+      color: Colors.blue,
+      child: ListTile(
+        title: Text(
+          model.iname,
+          style: TextStyle(fontSize: 20, color: kwhite),
+        ),
+        // subtitle: Text(
+        //   model.measurement.toString(),
+        // ),
+        trailing: _bultdTrailingWidget(context),
+      ),
+    );
   }
 
   Widget _bultdTrailingWidget(BuildContext context) {
     return FittedBox(
       child: Row(
         children: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  Provider.of<CounterProvider>(context, listen: false)
-                      .decreaseCounter();
-                });
-              },
-              icon: Icon(
-                Icons.remove,
-                color: kwhite,
-              )),
-          Consumer<CounterProvider>(
-            builder: (context, value, child) {
-              return CustomText(
-                text: value.getCounter.toString(),
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: kblack,
-              );
-            },
+          CustomText(
+            text: model.quantity.toString(),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: kblack,
+          ),
+          SizedBox(
+            width: 10,
           ),
           CustomText(
-            text: widget.model.measurement.toString(),
+            text: model.measurement.toString(),
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: kblack,
           ),
           IconButton(
-              onPressed: () {
-                Provider.of<CounterProvider>(context, listen: false)
-                    .increaseCounter();
-              },
+              onPressed: () => UtilsQuantity.showForm(context, null),
               icon: Icon(
                 Icons.add,
                 color: kwhite,

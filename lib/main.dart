@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventry_management_app/providers/home/counter_provider.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/screens/home_screen/home_screen.dart';
+import 'package:inventry_management_app/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
       builder: (context, widget) => ResponsiveWrapper.builder(widget,
           maxWidth: 1200,
           minWidth: 480,

@@ -30,6 +30,8 @@ class SqlHelper {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             iname TEXT,
             mesure TEXT,
+            room TEXT,
+            quantity TEXT,
             createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)""");
     } catch (e) {
       print(e);
@@ -79,12 +81,13 @@ class SqlHelper {
 
 //////////////////////////////////////////////////////////////
   //,,,,,,,,,,,,,,insert item,,,,,,,,,,//
-  static Future<int> createItem(String iname, String selectalue) async {
+  static Future<int> createItem(
+      String iname, String selectalue, String selectValueR) async {
     final db = await initDB();
 
     // final data = {'iname': iname};
     // final data2 = {'mesure': selectalue};
-    final data = {'iname': iname, 'mesure': selectalue};
+    final data = {'iname': iname, 'mesure': selectalue, 'room': selectValueR};
 
     final id = await db.insert('Items', data,
         conflictAlgorithm: ConflictAlgorithm.replace);
@@ -116,6 +119,15 @@ class SqlHelper {
     final resultid =
         await db.update('Items', data, where: "id=?", whereArgs: [id]);
     return resultid;
+  }
+
+////update product quantity/////
+  static Future<void> updateProductQty(int id, String quantity) async {
+    final db = await initDB();
+
+
+    final res = await db
+        .execute("UPDATE Items SET quantity='12' WHERE id = '$id'");
   }
 
   //,,,,,,,,delete item,,,,,//

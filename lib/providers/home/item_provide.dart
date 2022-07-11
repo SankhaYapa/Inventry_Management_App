@@ -13,15 +13,21 @@ class ItemProvider extends ChangeNotifier {
 
   TextEditingController get inameController => _inameController;
 
+  final TextEditingController _quantityController = TextEditingController();
+
+  TextEditingController get quantityController => _quantityController;
+
   //create new note function
-  Future<void> addNewItem(BuildContext context, String selectValue) async {
+  Future<void> addNewItem(
+      BuildContext context, String selectValue, String selectValueR) async {
     //showing a snackbar if title empty
     if (_inameController.text.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Fill the field")));
     }
 
-    await SqlHelper.createItem(_inameController.text, selectValue);
+    await SqlHelper.createItem(
+        _inameController.text, selectValue, selectValueR);
     //refresh rooms
     await refreshItems();
     _inameController.clear();
@@ -51,10 +57,19 @@ class ItemProvider extends ChangeNotifier {
 
   String? _selectValue;
   String? get getSelectValue => _selectValue;
+
+  String? _selectValueR;
+  String? get getSelectValueR => _selectValueR;
+
   //,,,,,,,,,,,,set text controllers when update
   void setTextControllers(ItemModel model) {
     _inameController.text = model.iname;
     _selectValue = model.measurement;
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    _selectValueR = model.room;
+    // print(model.iname);
+    // print(model.measurement);
+    // print(model.id);
 
     notifyListeners();
   }
@@ -66,6 +81,19 @@ class ItemProvider extends ChangeNotifier {
     await SqlHelper.updateItem(id, _inameController.text, selectvalue);
 
     _inameController.clear();
+    //refresh rooms
+    await refreshItems();
+
+    notifyListeners();
+  }
+
+//Update quantity function
+  Future<void> updateProductQty(
+      BuildContext context, int id, String quantity) async {
+    //update the room
+    await SqlHelper.updateProductQty(id, _quantityController.text);
+
+    _quantityController.clear();
     //refresh rooms
     await refreshItems();
 
