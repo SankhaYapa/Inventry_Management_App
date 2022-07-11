@@ -35,17 +35,23 @@ class RoomProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  //get items
-  Future<void> refreshItems() async {
-    _allRooms = await SqlHelper.getRooms();
-    notifyListeners();
-  }
-
   //,,,,,,,,,,,,set text controllers when update
   void setTextControllers(RoomModel model) {
     _rnameController.text = model.rname;
 
     notifyListeners();
+  }
+
+  //,,,,,,,,,,,,set roomlist
+  List<String> romms = [];
+  void clearRoomList() {
+    romms.clear();
+  }
+
+  Future<void> setRoomList(String data) async {
+    romms.add(data);
+    //print(romms.toString());
+    //notifyListeners();
   }
 
   //Update note function

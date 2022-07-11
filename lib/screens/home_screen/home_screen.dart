@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:inventry_management_app/components/custom_text.dart';
+import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/screens/seperated_screens/final_count_form.dart';
 import 'package:inventry_management_app/screens/seperated_screens/inventry_history.dart';
 import 'package:inventry_management_app/screens/seperated_screens/items_screen.dart';
@@ -12,6 +13,7 @@ import 'package:inventry_management_app/screens/seperated_screens/weekly_inventr
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:inventry_management_app/utils/constant.dart';
 import 'package:inventry_management_app/utils/util_function.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,6 +23,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<RoomProvider>(context, listen: false).refreshRooms();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
