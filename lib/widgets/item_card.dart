@@ -5,7 +5,7 @@ import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:inventry_management_app/utils/dialogs.dart';
-import 'package:inventry_management_app/utils/dialogs_items.dart';
+
 import 'package:inventry_management_app/utils/new_show_form.dart';
 import 'package:provider/provider.dart';
 
