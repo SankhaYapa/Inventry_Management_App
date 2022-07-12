@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inventry_management_app/controllers/sql_helper.dart';
 import 'package:inventry_management_app/model/room_model.dart';
@@ -32,6 +31,17 @@ class RoomProvider extends ChangeNotifier {
   //fetch all rooms
   List<RoomModel> _allRooms = [];
   List<RoomModel> get allRooms => _allRooms;
+
+  //calculate all rooms
+  int _totalRooms = 0;
+  String get totalRooms => _totalRooms.toString();
+  Future<void> calAllrooms() async {
+    _totalRooms = 0;
+    for (int i = 0; i < _allRooms.length; i++) {
+      print(_allRooms[i].rquantity.toString());
+      _totalRooms = _totalRooms + int.parse(_allRooms[i].rquantity.toString());
+    }
+  }
 
   //get rooms
   Future<void> refreshRooms() async {

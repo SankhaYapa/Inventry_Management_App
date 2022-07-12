@@ -55,7 +55,9 @@ class FinalCountFormCard extends StatelessWidget {
             width: 10,
           ),
           IconButton(
-              onPressed: () => UtilsFinalCount.showForm(context, null),
+              onPressed: () {
+                UtilsFinalCount.showForm(context, model);
+              },
               icon: Icon(
                 Icons.add,
                 color: kwhite,
