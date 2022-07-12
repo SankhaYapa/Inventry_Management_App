@@ -143,8 +143,11 @@ class ShowForms {
                                         selectvalueR.toString());
                                   } else {
                                     //update the room if model is not null
-                                    await value.updateItem(context, model.id!,
-                                        selectvalue.toString());
+                                    await value.updateItem(
+                                        context,
+                                        model.id!,
+                                        selectvalue.toString(),
+                                        selectvalueR.toString());
                                   }
 
                                   //when update close the bottom sheet
