@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:inventry_management_app/providers/home/item_provide.dart';
+import 'package:inventry_management_app/providers/home/room_provider.dart';
+import 'package:inventry_management_app/widgets/final_count_form_card.dart';
+import 'package:inventry_management_app/widgets/inventry_history_card.dart';
+import 'package:provider/provider.dart';
 
 class InventryHistory extends StatefulWidget {
   const InventryHistory({Key? key}) : super(key: key);
@@ -16,7 +21,21 @@ class _InventryHistoryState extends State<InventryHistory> {
       appBar: AppBar(
         title: Text("Inventry History"),
       ),
-      body: Container(),
+      body: Consumer<RoomProvider>(
+        builder: (context, value, child) {
+          return value.allRooms.isEmpty
+              ? Center(child: Text('No Items'))
+              : ListView.builder(
+                  padding: EdgeInsets.all(10),
+                  physics: BouncingScrollPhysics(),
+                  itemCount: value.allRooms.length,
+                  itemBuilder: (context, index) => InventryHistoryCard(
+                    // rname: value.allRooms[index].rname,
+                    model: value.allRooms[index],
+                  ),
+                );
+        },
+      ),
     );
   }
 }
