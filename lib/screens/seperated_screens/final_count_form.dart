@@ -18,6 +18,13 @@ class FinalCountForm extends StatefulWidget {
 
 class _FinalCountFormState extends State<FinalCountForm> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<RoomProvider>(context, listen: false).calAllrooms();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -69,43 +76,29 @@ class FooterSection extends StatelessWidget {
           Container(
             color: korange,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, right: 30, left: 30),
+          Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      text: 'Total Quantity',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    CustomText(
-                      text: '14',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: kwhite,
-                    borderRadius: BorderRadius.circular(15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: 'Total Quantity',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      CustomText(
+                        text: Provider.of<RoomProvider>(context, listen: false)
+                            .totalRooms,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      )
+                    ],
                   ),
-                  child: Center(
-                    child: CustomText(
-                      text: 'Calculate',
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                )
+                ),
               ],
             ),
           )

@@ -82,6 +82,7 @@ class UtilsFinalCount {
                                           model.id!,
                                           value.rquantityController.text
                                               .toString());
+                                      await value.calAllrooms();
                                     }
                                     //when update close the bottom sheet
                                     Navigator.of(context).pop();

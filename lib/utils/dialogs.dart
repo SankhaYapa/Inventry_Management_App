@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventry_management_app/model/room_model.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
+import 'package:inventry_management_app/utils/notification_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../components/custome_textfield.dart';
@@ -56,15 +57,25 @@ class Utils {
                                             side: BorderSide(color: Cblue)))),
                                 onPressed: () async {
                                   //save new room if model is null
-                                  if (model == null) {
-                                    await value.addNewRoom(context);
-                                  } else {
-                                    //update the room if model is not null
-                                    await value.updateRoom(context, model.id!);
-                                  }
 
-                                  //when update close the bottom sheet
-                                  Navigator.of(context).pop();
+                                  if (value.rnameController.text.isEmpty) {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "please fill the room name",
+                                    );
+                                  } else {
+                                    if (model == null) {
+                                      await value.addNewRoom(context);
+                                    } else {
+                                      //update the room if model is not null
+                                      await value.updateRoom(
+                                          context, model.id!);
+                                    }
+
+                                    //when update close the bottom sheet
+                                    Navigator.of(context).pop();
+                                  }
                                 },
                                 child: Text(
                                   model != null ? 'Update Room' : 'Add Room',
