@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:inventry_management_app/components/custome_textfield.dart';
 import 'package:inventry_management_app/controllers/sql_helper.dart';
@@ -5,6 +6,7 @@ import 'package:inventry_management_app/model/item_mode.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
+import 'package:inventry_management_app/utils/notification_dialog.dart';
 import 'package:provider/provider.dart';
 
 class ShowForms {
@@ -135,23 +137,44 @@ class ShowForms {
                                                 BorderRadius.circular(10),
                                             side: BorderSide(color: Cblue)))),
                                 onPressed: () async {
-                                  //save new item if model is null
-                                  if (model == null) {
-                                    await value.addNewItem(
-                                        context,
-                                        selectvalue.toString(),
-                                        selectvalueR.toString());
+                                  if (value.inameController.text.isEmpty) {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "please fill the item name",
+                                    );
+                                  } else if (selectvalue.toString() == "null") {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "please select the mesurement",
+                                    );
+                                  } else if (selectvalueR.toString() ==
+                                      "null") {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "please select the room",
+                                    );
                                   } else {
-                                    //update the room if model is not null
-                                    await value.updateItem(
-                                        context,
-                                        model.id!,
-                                        selectvalue.toString(),
-                                        selectvalueR.toString());
-                                  }
+                                    if (model == null) {
+                                      await value.addNewItem(
+                                          context,
+                                          selectvalue.toString(),
+                                          selectvalueR.toString());
+                                    } else {
+                                      //update the room if model is not null
+                                      await value.updateItem(
+                                          context,
+                                          model.id!,
+                                          selectvalue.toString(),
+                                          selectvalueR.toString());
+                                    }
 
-                                  //when update close the bottom sheet
-                                  Navigator.of(context).pop();
+                                    //when update close the bottom sheet
+                                    Navigator.of(context).pop();
+                                  }
+                                  //save new item if model is null
                                 },
                                 child: Text(
                                   model != null ? 'Update Item' : 'Add Item',

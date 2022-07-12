@@ -60,11 +60,14 @@ class WeeklyInventryCard extends StatelessWidget {
             color: kblack,
           ),
           IconButton(
-              onPressed: () => UtilsQuantity.showForm(context, null),
-              icon: Icon(
-                Icons.add,
-                color: kwhite,
-              )),
+            onPressed: () {
+              UtilsQuantity.showForm(context, model);
+            },
+            icon: Icon(
+              Icons.add,
+              color: kwhite,
+            ),
+          ),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:inventry_management_app/model/room_model.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
+import 'package:inventry_management_app/utils/notification_dialog.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +38,7 @@ class UtilsQuantity {
                           CustomTextField(
                             controller: value.quantityController,
                             hintText: 'Quantity',
+                            inputType: TextInputType.number,
                           ),
                           SizedBox(
                             height: 70,
@@ -58,16 +60,32 @@ class UtilsQuantity {
                                                 BorderRadius.circular(10),
                                             side: BorderSide(color: Cblue)))),
                                 onPressed: () async {
-                                  //save quantity if model is not null
-                                  if (model != null) {
-                                    await value.updateProductQty(
-                                        context,
-                                        model.id!,
-                                        value.quantityController.toString());
+                                  if (value.quantityController.text.isEmpty) {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "Please fill the Quantity",
+                                    );
+                                  } else if ((double.tryParse(
+                                          value.quantityController.text) ==
+                                      null)) {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "Please fill the Quantity as number",
+                                    );
+                                  } else {
+                                    //save quantity if model is not null
+                                    if (model != null) {
+                                      await value.updateProductQty(
+                                          context,
+                                          model.id!,
+                                          value.quantityController.text
+                                              .toString());
+                                    }
+                                    //when update close the bottom sheet
+                                    Navigator.of(context).pop();
                                   }
-
-                                  //when update close the bottom sheet
-                                  Navigator.of(context).pop();
                                 },
                                 child: Text(
                                   'Update Quantity',
