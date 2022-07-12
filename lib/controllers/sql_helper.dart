@@ -25,7 +25,11 @@ class SqlHelper {
   static Future<void> createTables(Database database) async {
     try {
       await database.execute(
-          "CREATE TABLE Rooms(id INTEGER PRIMARY KEY AUTOINCREMENT,rname TEXT,createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+          "CREATE TABLE Rooms("
+              "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "rname TEXT,"
+              "rquantity TEXT,"
+              "createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
       await database.execute("""CREATE TABLE Items(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             iname TEXT,
@@ -42,7 +46,7 @@ class SqlHelper {
   static Future<int> createRoom(String rname) async {
     final db = await initDB();
 
-    final data = {'rname': rname};
+    final data = {'rname': rname, 'rquantity': 0};
 
     final id = await db.insert('Rooms', data,
         conflictAlgorithm: ConflictAlgorithm.replace);
@@ -68,6 +72,21 @@ class SqlHelper {
     final resultid =
         await db.update('Rooms', data, where: "id=?", whereArgs: [id]);
     return resultid;
+  }
+
+  ////update room quantity/////
+  static Future<void> updateRoomQuantity(int id, String rquantity) async {
+    final db = await initDB();
+
+    // final res = await db
+    //     .execute("UPDATE Items SET quantity='12' WHERE id = '$id'");
+
+    final res = await db.execute("""
+                    UPDATE Rooms
+                    SET rquantity = '$rquantity'
+                    WHERE id = $id;
+                    
+                    """);
   }
 
   //,,,,,,,,delete room,,,,,//

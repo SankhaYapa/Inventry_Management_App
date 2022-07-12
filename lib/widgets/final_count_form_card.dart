@@ -8,6 +8,7 @@ import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:inventry_management_app/utils/dialogs.dart';
+import 'package:inventry_management_app/utils/dialogs_final_count.dart';
 import 'package:inventry_management_app/utils/dialogs_quantity.dart';
 
 import 'package:inventry_management_app/utils/new_show_form.dart';
@@ -45,7 +46,7 @@ class FinalCountFormCard extends StatelessWidget {
       child: Row(
         children: [
           CustomText(
-            text: 'ss',
+            text: model.rquantity.toString(),
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: kblack,
@@ -54,7 +55,7 @@ class FinalCountFormCard extends StatelessWidget {
             width: 10,
           ),
           IconButton(
-              onPressed: () => UtilsQuantity.showForm(context, null),
+              onPressed: () => UtilsFinalCount.showForm(context, null),
               icon: Icon(
                 Icons.add,
                 color: kwhite,

@@ -45,7 +45,7 @@ class InventryHistoryCard extends StatelessWidget {
       child: Row(
         children: [
           CustomText(
-            text: 'ss',
+            text: model.rquantity.toString(),
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: kblack,

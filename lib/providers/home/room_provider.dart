@@ -10,6 +10,10 @@ class RoomProvider extends ChangeNotifier {
 
   TextEditingController get rnameController => _rnameController;
 
+  final TextEditingController _rquantityController = TextEditingController();
+
+  TextEditingController get rquantityController => _rquantityController;
+
   //create new note function
   Future<void> addNewRoom(BuildContext context) async {
     //showing a snackbar if title empty
@@ -38,6 +42,7 @@ class RoomProvider extends ChangeNotifier {
   //,,,,,,,,,,,,set text controllers when update
   void setTextControllers(RoomModel model) {
     _rnameController.text = model.rname;
+    _rquantityController.text = model.rquantity.toString();
 
     notifyListeners();
   }
@@ -60,6 +65,19 @@ class RoomProvider extends ChangeNotifier {
     await SqlHelper.updateRoom(id, _rnameController.text);
 
     _rnameController.clear();
+    //refresh rooms
+    await refreshRooms();
+
+    notifyListeners();
+  }
+
+//Update quantity room function
+  Future<void> updateRoomQuantity(
+      BuildContext context, int id, String rquantity) async {
+    //update the room
+    await SqlHelper.updateRoomQuantity(id, rquantity);
+
+    _rquantityController.clear();
     //refresh rooms
     await refreshRooms();
 

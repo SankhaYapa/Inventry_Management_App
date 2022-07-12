@@ -28,57 +28,6 @@ class _FinalCountFormState extends State<FinalCountForm> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //UpperSection(),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(
-          //     horizontal: 30,
-          //   ),
-          //   child: Container(
-          //     width: double.infinity,
-          //     height: 111,
-          //     decoration: BoxDecoration(
-          //         color: korange, borderRadius: BorderRadius.circular(15)),
-          //     child: Stack(
-          //       children: [
-          //         Positioned(
-          //             left: 23,
-          //             top: 23,
-          //             child: Icon(
-          //               Icons.location_on_outlined,
-          //               color: kwhite,
-          //             )),
-          //         Positioned(
-          //           top: 23,
-          //           left: 54,
-          //           child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               // CustomText(
-          //               //   text: 'Delivered to:',
-          //               //   fontSize: 14,
-          //               //   fontWeight: FontWeight.w400,
-          //               //   color: kwhite,
-          //               // ),
-          //               // CustomText(
-          //               //   text: '242 5T Marks Eve,\nFinlend',
-          //               //   fontSize: 14,
-          //               //   fontWeight: FontWeight.w400,
-          //               //   color: kwhite,
-          //               // )
-          //             ],
-          //           ),
-          //         ),
-          //         Positioned(
-          //             right: 17,
-          //             top: 52,
-          //             child: Icon(
-          //               Icons.keyboard_arrow_down,
-          //               color: kwhite,
-          //             )),
-          //       ],
-          //     ),
-          //   ),
-          // ),
           Expanded(
             child: Consumer<RoomProvider>(
               builder: (context, value, child) {
