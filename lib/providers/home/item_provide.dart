@@ -67,6 +67,7 @@ class ItemProvider extends ChangeNotifier {
     _selectValue = model.measurement;
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     _selectValueR = model.room;
+    _quantityController.text = model.quantity.toString();
     // print(model.iname);
     // print(model.measurement);
     // print(model.id);
@@ -92,7 +93,7 @@ class ItemProvider extends ChangeNotifier {
   Future<void> updateProductQty(
       BuildContext context, int id, String quantity) async {
     //update the room
-    await SqlHelper.updateProductQty(id, _quantityController.text);
+    await SqlHelper.updateProductQty(id, quantity);
 
     _quantityController.clear();
     //refresh rooms

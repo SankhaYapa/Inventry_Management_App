@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
@@ -7,15 +8,22 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.preffix,
     this.hintText,
+    this.inputType = TextInputType.text,
   }) : super(key: key);
   final TextEditingController? controller;
   final Widget? preffix;
   final String? hintText;
+  TextInputType inputType;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: TextField(
+        //keyboardType: TextInputType.number,
+        keyboardType: inputType,
+        // inputFormatters: <TextInputFormatter>[
+        //   FilteringTextInputFormatter.digitsOnly,
+        // ],
         controller: controller,
         decoration: InputDecoration(
             filled: true,

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:inventry_management_app/components/custome_textfield.dart';
-import 'package:inventry_management_app/widgets/item_card.dart';
 import 'package:inventry_management_app/widgets/weekly_inventry_card.dart';
 import 'package:provider/provider.dart';
 

@@ -87,7 +87,12 @@ class SqlHelper {
 
     // final data = {'iname': iname};
     // final data2 = {'mesure': selectalue};
-    final data = {'iname': iname, 'mesure': selectalue, 'room': selectValueR,'quantity':0,};
+    final data = {
+      'iname': iname,
+      'mesure': selectalue,
+      'room': selectValueR,
+      'quantity': 0,
+    };
 
     final id = await db.insert('Items', data,
         conflictAlgorithm: ConflictAlgorithm.replace);
@@ -106,14 +111,15 @@ class SqlHelper {
   }
 
   //,,,,,,,,update item,,,,,//
-  static Future<int> updateItem(int id, String iname, String mes,String selectValueR) async {
+  static Future<int> updateItem(
+      int id, String iname, String mes, String selectValueR) async {
     final db = await initDB();
     //final data = {'iname': iname, 'mesure': selectalue};
 
     final data = {
       'iname': iname,
       'mesure': mes,
-      'room':selectValueR,
+      'room': selectValueR,
       'createdAt': DateTime.now().toString(),
     };
 //,,,,,,using whereArgs to prevent sql injection
@@ -126,8 +132,15 @@ class SqlHelper {
   static Future<void> updateProductQty(int id, String quantity) async {
     final db = await initDB();
 
-    final res = await db
-        .execute("UPDATE Items SET quantity='12' WHERE id = '$id'");
+    // final res = await db
+    //     .execute("UPDATE Items SET quantity='12' WHERE id = '$id'");
+
+    final res = await db.execute("""
+                    UPDATE Items
+                    SET quantity = '$quantity'
+                    WHERE id = $id;
+                    
+                    """);
   }
 
   //,,,,,,,,delete item,,,,,//

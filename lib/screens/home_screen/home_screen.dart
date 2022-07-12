@@ -4,6 +4,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:inventry_management_app/components/custom_text.dart';
+import 'package:inventry_management_app/model/room_model.dart';
+import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/screens/seperated_screens/final_count_form.dart';
 import 'package:inventry_management_app/screens/seperated_screens/inventry_history.dart';
@@ -26,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    Provider.of<ItemProvider>(context, listen: false).refreshItems();
     Provider.of<RoomProvider>(context, listen: false).refreshRooms();
+    Provider.of<RoomProvider>(context, listen: false).clearRoomList();
     super.initState();
   }
 
