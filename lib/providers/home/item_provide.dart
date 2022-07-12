@@ -76,9 +76,9 @@ class ItemProvider extends ChangeNotifier {
 
   //Update item function
   Future<void> updateItem(
-      BuildContext context, int id, String selectvalue) async {
+      BuildContext context, int id, String selectvalue,String selectValueR) async {
     //update the room
-    await SqlHelper.updateItem(id, _inameController.text, selectvalue);
+    await SqlHelper.updateItem(id, _inameController.text, selectvalue,selectValueR);
 
     _inameController.clear();
     //refresh rooms
