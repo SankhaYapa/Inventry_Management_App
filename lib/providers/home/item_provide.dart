@@ -14,8 +14,9 @@ class ItemProvider extends ChangeNotifier {
   TextEditingController get inameController => _inameController;
 
   final TextEditingController _quantityController = TextEditingController();
-
   TextEditingController get quantityController => _quantityController;
+  final TextEditingController _qquantityController = TextEditingController();
+  TextEditingController get qquantityController => _qquantityController;
 
   //create new note function
   Future<void> addNewItem(BuildContext context, String selectValue,
@@ -24,6 +25,13 @@ class ItemProvider extends ChangeNotifier {
     if (_inameController.text.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Fill the field")));
+    }
+
+    if (selectValueR == "Not Select room") {
+      selectValueR = "empty";
+    }
+    if (selectValueRR == "Not Select room") {
+      selectValueRR = "empty";
     }
 
     await SqlHelper.createItem(
@@ -50,6 +58,18 @@ class ItemProvider extends ChangeNotifier {
       _totalItems = _totalItems + int.parse(_allItems[i].quantity.toString());
     }
   }
+
+  //final count total
+  // int _totalCount = 0;
+  // String get totalCount => _totalCount.toString();
+  // Future<void> calTotalCount() async {
+  //   _totalCount = 0;
+  //   for (int i = 0; i < _allItems.length; i++) {
+  //     _totalCount = _totalCount +
+  //         int.parse(_allItems[i].quantity.toString()) +
+  //         int.parse(_allItems[i].qquantity.toString());
+  //   }
+  // }
 
   //get items
   Future<void> refreshItems() async {
@@ -83,6 +103,7 @@ class ItemProvider extends ChangeNotifier {
     _selectValueR = model.room;
     _selectValueRR = model.rroom;
     _quantityController.text = model.quantity.toString();
+    _qquantityController.text = model.qquantity.toString();
     // print(model.iname);
     // print(model.measurement);
     // print(model.id);
@@ -106,11 +127,12 @@ class ItemProvider extends ChangeNotifier {
 
 //Update quantity function
   Future<void> updateProductQty(
-      BuildContext context, int id, String quantity) async {
+      BuildContext context, int id, String quantity, String qquantity) async {
     //update the room
-    await SqlHelper.updateProductQty(id, quantity);
+    await SqlHelper.updateProductQty(id, quantity, qquantity);
 
     _quantityController.clear();
+    _qquantityController.clear();
     //refresh rooms
     await refreshItems();
 

@@ -22,7 +22,7 @@ class _FinalCountFormState extends State<FinalCountForm> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<ItemProvider>(context, listen: false).calAllItems();
+
     super.initState();
   }
 
@@ -54,7 +54,7 @@ class _FinalCountFormState extends State<FinalCountForm> {
                   SizedBox(
                     width: 30,
                   ),
-                  CustomText(text: 'Size'),
+                  // CustomText(text: 'Size'),
                   SizedBox(
                     width: 30,
                   ),
@@ -67,13 +67,12 @@ class _FinalCountFormState extends State<FinalCountForm> {
             child: Consumer<ItemProvider>(
               builder: (context, value, child) {
                 return value.allItems.isEmpty
-                    ? Center(child: Text('No Rooms'))
+                    ? Center(child: Text('No Final count'))
                     : ListView.builder(
                         padding: EdgeInsets.all(10),
                         physics: BouncingScrollPhysics(),
                         itemCount: value.allItems.length,
                         itemBuilder: (context, index) => FinalCountFormCard(
-                          // rname: value.allRooms[index].rname,
                           model: value.allItems[index],
                         ),
                       );

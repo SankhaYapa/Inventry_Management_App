@@ -13,7 +13,7 @@ import '../components/custome_textfield.dart';
 class UtilsQuantity {
 //show bottom sheet function
   @override
-  static void showForm(BuildContext context, ItemModel? model) {
+  static void showForm(BuildContext context, ItemModel? model, int r) {
     //set the existing rooms name to the text controllers
     if (model != null) {
       Provider.of<ItemProvider>(context, listen: false)
@@ -36,7 +36,9 @@ class UtilsQuantity {
                             height: 20,
                           ),
                           CustomTextField(
-                            controller: value.quantityController,
+                            controller: (r == 0)
+                                ? value.quantityController
+                                : value.qquantityController,
                             hintText: 'Quantity',
                             inputType: TextInputType.number,
                           ),
@@ -78,10 +80,13 @@ class UtilsQuantity {
                                     //save quantity if model is not null
                                     if (model != null) {
                                       await value.updateProductQty(
-                                          context,
-                                          model.id!,
-                                          value.quantityController.text
-                                              .toString());
+                                        context,
+                                        model.id!,
+                                        value.quantityController.text
+                                            .toString(),
+                                        value.qquantityController.text
+                                            .toString(),
+                                      );
                                     }
                                     //when update close the bottom sheet
                                     Navigator.of(context).pop();

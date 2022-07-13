@@ -76,14 +76,14 @@ class UtilsFinalCount {
                                     );
                                   } else {
                                     //save quantity if model is not null
-                                    if (model != null) {
-                                      await value.updateProductQty(
-                                          context,
-                                          model.id!,
-                                          value.quantityController.text
-                                              .toString());
-                                      await value.calAllItems();
-                                    }
+                                    // if (model != null) {
+                                    //   await value.updateProductQty(
+                                    //       context,
+                                    //       model.id!,
+                                    //       value.quantityController.text
+                                    //           .toString());
+                                    //   await value.calAllItems();
+                                    // }
                                     //when update close the bottom sheet
                                     Navigator.of(context).pop();
                                   }

@@ -52,7 +52,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
       Provider.of<RoomProvider>(context, listen: false)
           .setRoomList(allRooms[i].rname);
     }
-
+    Provider.of<RoomProvider>(context, listen: false)
+        .setRoomList("Not Select room");
     super.initState();
   }
 

@@ -13,15 +13,6 @@ import 'package:inventry_management_app/widgets/room_card.dart';
 import 'package:provider/provider.dart';
 
 class RoomSceern extends StatefulWidget {
-  final List<String> items = [
-    'Select a Room',
-    'Room 1',
-    'Room 2',
-    'Room 3',
-    'Room 4',
-  ];
-  String value = 'Select a Room';
-
   RoomSceern({Key? key}) : super(key: key);
 
   @override

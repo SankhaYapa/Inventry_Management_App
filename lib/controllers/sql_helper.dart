@@ -36,6 +36,7 @@ class SqlHelper {
             room TEXT,
             rroom TEXT,
             quantity TEXT,
+            qquantity TEXT,
             createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)""");
     } catch (e) {
       print(e);
@@ -112,6 +113,7 @@ class SqlHelper {
       'room': selectValueR,
       'rroom': selectValueRR,
       'quantity': 0,
+      'qquantity': 0,
     };
 
     final id = await db.insert('Items', data,
@@ -150,7 +152,8 @@ class SqlHelper {
   }
 
 ////update product quantity/////
-  static Future<void> updateProductQty(int id, String quantity) async {
+  static Future<void> updateProductQty(
+      int id, String quantity, String qquantity) async {
     final db = await initDB();
 
     // final res = await db
@@ -158,7 +161,8 @@ class SqlHelper {
 
     final res = await db.execute("""
                     UPDATE Items
-                    SET quantity = '$quantity'
+                    SET quantity = '$quantity',
+                        qquantity = '$qquantity'
                     WHERE id = $id;
                     
                     """);
