@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:inventry_management_app/components/custom_text.dart';
+import 'package:inventry_management_app/controllers/sql_helper.dart';
 import 'package:inventry_management_app/model/room_model.dart';
 import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Provider.of<ItemProvider>(context, listen: false).refreshItems();
     Provider.of<RoomProvider>(context, listen: false).refreshRooms();
     Provider.of<RoomProvider>(context, listen: false).clearRoomList();
+
     super.initState();
   }
 

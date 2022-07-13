@@ -44,30 +44,97 @@ class WeeklyInventryCard extends StatelessWidget {
     return FittedBox(
       child: Row(
         children: [
-          CustomText(
-            text: model.quantity.toString(),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: kblack,
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          CustomText(
-            text: model.measurement.toString(),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: kblack,
-          ),
-          IconButton(
-            onPressed: () {
-              UtilsQuantity.showForm(context, model);
-            },
-            icon: Icon(
-              Icons.add,
-              color: kwhite,
-            ),
-          ),
+          (model.room.toString() != "empty")
+              ? GestureDetector(
+                  onTap: () {
+                    UtilsQuantity.showForm(context, model, 0);
+                  },
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.centerRight,
+                            width: 50,
+                            child: CustomText(
+                              text: model.quantity.toString(),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: kblack,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          SizedBox(
+                            width: 60,
+                            child: CustomText(
+                              text: model.measurement.toString(),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: kblack,
+                            ),
+                          ),
+                        ],
+                      ),
+                      CustomText(
+                        text: model.room.toString(),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  alignment: Alignment.center,
+                  width: 150,
+                  child: CustomText(text: "Empty"),
+                ),
+          (model.rroom.toString() != "empty")
+              ? GestureDetector(
+                  onTap: () {
+                    UtilsQuantity.showForm(context, model, 1);
+                  },
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 50,
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            width: 50,
+                            child: CustomText(
+                              text: model.qquantity.toString(),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: kblack,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          SizedBox(
+                            width: 65,
+                            child: CustomText(
+                              text: model.measurement.toString(),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: kblack,
+                            ),
+                          ),
+                        ],
+                      ),
+                      CustomText(
+                        text: model.rroom.toString(),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  width: 150,
+                  alignment: Alignment.center,
+                  child: CustomText(text: "Empty"),
+                ),
         ],
       ),
     );

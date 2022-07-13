@@ -54,17 +54,20 @@ class FinalCountFormCard extends StatelessWidget {
           SizedBox(
             width: 100,
           ),
-          CustomText(
-            text: model.quantity.toString(),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: kblack,
-          ),
+          // CustomText(
+          //   text: model.quantity.toString(),
+          //   fontSize: 20,
+          //   fontWeight: FontWeight.bold,
+          //   color: kblack,
+          // ),
           SizedBox(
             width: 40,
           ),
           CustomText(
-            text: "20",
+            //text: Provider.of<ItemProvider>(context, listen: false).totalCount,
+            text: (double.parse(model.quantity.toString()) +
+                    double.parse(model.qquantity.toString()))
+                .toString(),
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: kblack,
