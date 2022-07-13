@@ -20,7 +20,7 @@ class RoomCard extends StatelessWidget {
       child: ListTile(
         title: Text(
           model.rname,
-          style: TextStyle(fontSize: 16, color: kwhite),
+          style: TextStyle(fontSize: 20, color: kwhite),
         ),
         trailing: SizedBox(
           width: 100,

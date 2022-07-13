@@ -24,17 +24,17 @@ class SqlHelper {
   //create table
   static Future<void> createTables(Database database) async {
     try {
-      await database.execute(
-          "CREATE TABLE Rooms("
-              "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-              "rname TEXT,"
-              "rquantity TEXT,"
-              "createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+      await database.execute("CREATE TABLE Rooms("
+          "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+          "rname TEXT,"
+          "rquantity TEXT,"
+          "createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)");
       await database.execute("""CREATE TABLE Items(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             iname TEXT,
             mesure TEXT,
             room TEXT,
+            rroom TEXT,
             quantity TEXT,
             createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)""");
     } catch (e) {
@@ -100,8 +100,8 @@ class SqlHelper {
 
 //////////////////////////////////////////////////////////////
   //,,,,,,,,,,,,,,insert item,,,,,,,,,,//
-  static Future<int> createItem(
-      String iname, String selectalue, String selectValueR) async {
+  static Future<int> createItem(String iname, String selectalue,
+      String selectValueR, String selectValueRR) async {
     final db = await initDB();
 
     // final data = {'iname': iname};
@@ -110,6 +110,7 @@ class SqlHelper {
       'iname': iname,
       'mesure': selectalue,
       'room': selectValueR,
+      'rroom': selectValueRR,
       'quantity': 0,
     };
 
@@ -130,8 +131,8 @@ class SqlHelper {
   }
 
   //,,,,,,,,update item,,,,,//
-  static Future<int> updateItem(
-      int id, String iname, String mes, String selectValueR) async {
+  static Future<int> updateItem(int id, String iname, String mes,
+      String selectValueR, String selectValueRR) async {
     final db = await initDB();
     //final data = {'iname': iname, 'mesure': selectalue};
 
@@ -139,6 +140,7 @@ class SqlHelper {
       'iname': iname,
       'mesure': mes,
       'room': selectValueR,
+      'rroom': selectValueRR,
       'createdAt': DateTime.now().toString(),
     };
 //,,,,,,using whereArgs to prevent sql injection

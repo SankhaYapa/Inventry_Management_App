@@ -21,7 +21,7 @@ class FinalCountFormCard extends StatelessWidget {
     required this.model,
   }) : super(key: key);
   //
-  final RoomModel model;
+  final ItemModel model;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -30,7 +30,7 @@ class FinalCountFormCard extends StatelessWidget {
       color: Colors.blue,
       child: ListTile(
         title: Text(
-          model.rname,
+          model.iname,
           style: TextStyle(fontSize: 20, color: kwhite),
         ),
         // subtitle: Text(
@@ -46,22 +46,37 @@ class FinalCountFormCard extends StatelessWidget {
       child: Row(
         children: [
           CustomText(
-            text: model.rquantity.toString(),
+            text: model.measurement.toString(),
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: kblack,
           ),
           SizedBox(
-            width: 10,
+            width: 100,
           ),
-          IconButton(
-              onPressed: () {
-                UtilsFinalCount.showForm(context, model);
-              },
-              icon: Icon(
-                Icons.add,
-                color: kwhite,
-              )),
+          CustomText(
+            text: model.quantity.toString(),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: kblack,
+          ),
+          SizedBox(
+            width: 40,
+          ),
+          CustomText(
+            text: "20",
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: kblack,
+          ),
+          // IconButton(
+          //     onPressed: () {
+          //       UtilsFinalCount.showForm(context, model);
+          //     },
+          //     icon: Icon(
+          //       Icons.add,
+          //       color: kwhite,
+          //     )),
         ],
       ),
     );

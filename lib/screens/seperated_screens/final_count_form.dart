@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:inventry_management_app/components/custom_text.dart';
+
+import 'package:inventry_management_app/providers/home/item_provide.dart';
 import 'package:inventry_management_app/providers/home/room_provider.dart';
 import 'package:inventry_management_app/utils/app_colors.dart';
 import 'package:inventry_management_app/utils/constant.dart';
@@ -20,7 +22,7 @@ class _FinalCountFormState extends State<FinalCountForm> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<RoomProvider>(context, listen: false).calAllrooms();
+    Provider.of<ItemProvider>(context, listen: false).calAllItems();
     super.initState();
   }
 
@@ -35,75 +37,51 @@ class _FinalCountFormState extends State<FinalCountForm> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Container(
+              width: size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CustomText(text: 'Product '),
+                  SizedBox(
+                    width: 90,
+                  ),
+                  CustomText(text: 'Measurment'),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  CustomText(text: 'Size'),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  CustomText(text: 'Total'),
+                ],
+              ),
+            ),
+          ),
           Expanded(
-            child: Consumer<RoomProvider>(
+            child: Consumer<ItemProvider>(
               builder: (context, value, child) {
-                return value.allRooms.isEmpty
+                return value.allItems.isEmpty
                     ? Center(child: Text('No Rooms'))
                     : ListView.builder(
                         padding: EdgeInsets.all(10),
                         physics: BouncingScrollPhysics(),
-                        itemCount: value.allRooms.length,
+                        itemCount: value.allItems.length,
                         itemBuilder: (context, index) => FinalCountFormCard(
                           // rname: value.allRooms[index].rname,
-                          model: value.allRooms[index],
+                          model: value.allItems[index],
                         ),
                       );
               },
             ),
           ),
-          FooterSection(size: size),
         ],
       )),
-    );
-  }
-}
-
-class FooterSection extends StatelessWidget {
-  const FooterSection({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 160,
-      child: Stack(
-        children: [
-          Container(
-            color: korange,
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: 'Total Quantity',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      CustomText(
-                        text: Provider.of<RoomProvider>(context, listen: false)
-                            .totalRooms,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
     );
   }
 }

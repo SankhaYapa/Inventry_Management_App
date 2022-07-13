@@ -18,20 +18,28 @@ class _WeeklyInventryCountState extends State<WeeklyInventryCount> {
       appBar: AppBar(
         title: Text("Weekly Inventry Count"),
       ),
-      body: Consumer<ItemProvider>(
-        builder: (context, value, child) {
-          return value.allItems.isEmpty
-              ? Center(child: Text('No Items'))
-              : ListView.builder(
-                  padding: EdgeInsets.all(10),
-                  physics: BouncingScrollPhysics(),
-                  itemCount: value.allItems.length,
-                  itemBuilder: (context, index) => WeeklyInventryCard(
-                    // rname: value.allRooms[index].rname,
-                    model: value.allItems[index],
-                  ),
-                );
-        },
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Consumer<ItemProvider>(
+                builder: (context, value, child) {
+                  return value.allItems.isEmpty
+                      ? Center(child: Text('No Items'))
+                      : ListView.builder(
+                          padding: EdgeInsets.all(10),
+                          physics: BouncingScrollPhysics(),
+                          itemCount: value.allItems.length,
+                          itemBuilder: (context, index) => WeeklyInventryCard(
+                            // rname: value.allRooms[index].rname,
+                            model: value.allItems[index],
+                          ),
+                        );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

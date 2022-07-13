@@ -18,8 +18,8 @@ class ItemProvider extends ChangeNotifier {
   TextEditingController get quantityController => _quantityController;
 
   //create new note function
-  Future<void> addNewItem(
-      BuildContext context, String selectValue, String selectValueR) async {
+  Future<void> addNewItem(BuildContext context, String selectValue,
+      String selectValueR, String selectValueRR) async {
     //showing a snackbar if title empty
     if (_inameController.text.isEmpty) {
       ScaffoldMessenger.of(context)
@@ -27,7 +27,7 @@ class ItemProvider extends ChangeNotifier {
     }
 
     await SqlHelper.createItem(
-        _inameController.text, selectValue, selectValueR);
+        _inameController.text, selectValue, selectValueR, selectValueRR);
     //refresh rooms
     await refreshItems();
     _inameController.clear();
@@ -39,6 +39,17 @@ class ItemProvider extends ChangeNotifier {
   //fetch all items
   List<ItemModel> _allItems = [];
   List<ItemModel> get allItems => _allItems;
+
+  //calculate all rooms
+  int _totalItems = 0;
+  String get totalItems => _totalItems.toString();
+  Future<void> calAllItems() async {
+    _totalItems = 0;
+    for (int i = 0; i < _allItems.length; i++) {
+      print(_allItems[i].quantity.toString());
+      _totalItems = _totalItems + int.parse(_allItems[i].quantity.toString());
+    }
+  }
 
   //get items
   Future<void> refreshItems() async {
@@ -61,12 +72,16 @@ class ItemProvider extends ChangeNotifier {
   String? _selectValueR;
   String? get getSelectValueR => _selectValueR;
 
+  String? _selectValueRR;
+  String? get getSelectValueRR => _selectValueRR;
+
   //,,,,,,,,,,,,set text controllers when update
   void setTextControllers(ItemModel model) {
     _inameController.text = model.iname;
     _selectValue = model.measurement;
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     _selectValueR = model.room;
+    _selectValueRR = model.rroom;
     _quantityController.text = model.quantity.toString();
     // print(model.iname);
     // print(model.measurement);
@@ -77,10 +92,10 @@ class ItemProvider extends ChangeNotifier {
 
   //Update item function
   Future<void> updateItem(BuildContext context, int id, String selectvalue,
-      String selectValueR) async {
+      String selectValueR, String selectValueRR) async {
     //update the room
     await SqlHelper.updateItem(
-        id, _inameController.text, selectvalue, selectValueR);
+        id, _inameController.text, selectvalue, selectValueR, selectValueRR);
 
     _inameController.clear();
     //refresh rooms

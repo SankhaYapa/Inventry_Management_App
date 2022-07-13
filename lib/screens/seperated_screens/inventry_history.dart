@@ -16,25 +16,40 @@ class InventryHistory extends StatefulWidget {
 
 class _InventryHistoryState extends State<InventryHistory> {
   @override
+  void initState() {
+    // TODO: implement initState
+    Provider.of<RoomProvider>(context, listen: false).calAllrooms();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Inventry History"),
       ),
-      body: Consumer<RoomProvider>(
-        builder: (context, value, child) {
-          return value.allRooms.isEmpty
-              ? Center(child: Text('No Items'))
-              : ListView.builder(
-                  padding: EdgeInsets.all(10),
-                  physics: BouncingScrollPhysics(),
-                  itemCount: value.allRooms.length,
-                  itemBuilder: (context, index) => InventryHistoryCard(
-                    // rname: value.allRooms[index].rname,
-                    model: value.allRooms[index],
-                  ),
-                );
-        },
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Consumer<RoomProvider>(
+                builder: (context, value, child) {
+                  return value.allRooms.isEmpty
+                      ? Center(child: Text('No Items'))
+                      : ListView.builder(
+                          padding: EdgeInsets.all(10),
+                          physics: BouncingScrollPhysics(),
+                          itemCount: value.allRooms.length,
+                          itemBuilder: (context, index) => InventryHistoryCard(
+                            // rname: value.allRooms[index].rname,
+                            model: value.allRooms[index],
+                          ),
+                        );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

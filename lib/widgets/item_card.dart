@@ -26,10 +26,29 @@ class ItemCard extends StatelessWidget {
       child: ListTile(
         title: Text(
           model.iname,
-          style: TextStyle(fontSize: 16, color: kwhite),
+          style: TextStyle(fontSize: 20, color: kwhite),
         ),
-        subtitle: Text(
-          model.measurement.toString(),
+        subtitle: Row(
+          children: [
+            Text(
+              model.measurement.toString(),
+              style: TextStyle(fontSize: 16, color: kwhite),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              model.room.toString(),
+              style: TextStyle(fontSize: 16, color: kwhite),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              model.rroom.toString(),
+              style: TextStyle(fontSize: 16, color: kwhite),
+            ),
+          ],
         ),
         trailing: SizedBox(
           width: 100,

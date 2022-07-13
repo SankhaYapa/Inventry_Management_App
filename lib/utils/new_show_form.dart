@@ -23,6 +23,8 @@ class ShowForms {
         Provider.of<ItemProvider>(context, listen: false).getSelectValue;
     String? selectvalueR =
         Provider.of<ItemProvider>(context, listen: false).getSelectValueR;
+    String? selectvalueRR =
+        Provider.of<ItemProvider>(context, listen: false).getSelectValueRR;
     //set the existing rooms name to the text controllers
     if (model != null) {
       Provider.of<ItemProvider>(context, listen: false)
@@ -118,6 +120,50 @@ class ShowForms {
                             },
                           ),
                           SizedBox(
+                            height: 20,
+                          ),
+                          Consumer<RoomProvider>(
+                            builder: (context, value3, child) {
+                              return DropdownButtonFormField(
+                                  value: Provider.of<ItemProvider>(context,
+                                          listen: false)
+                                      .getSelectValueRR,
+                                  items: value3.romms
+                                      .map((e) => DropdownMenuItem(
+                                            child: Text(e),
+                                            value: e,
+                                          ))
+                                      .toList(),
+                                  onChanged: (val) {
+                                    selectvalueRR = val.toString();
+
+                                    //print(SqlHelper.getRooms());
+                                    // value3.refreshRooms();
+                                    // print(value3.allRooms);
+
+                                    //print(value3.allRooms[1].rname);
+
+                                    // for (int i = 0;
+                                    //     i < value3.allRooms.length;
+                                    //     i++) {
+                                    //   print(value3.allRooms[i].rname);
+                                    //   value3.setRoomList(
+                                    //       value3.allRooms[i].rname);
+                                    // }
+                                  },
+                                  icon: Icon(Icons.arrow_drop_down_circle,
+                                      color: Cblue),
+                                  decoration: InputDecoration(
+                                    labelText: "Select Room",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                            color: Color.fromARGB(
+                                                255, 40, 40, 40))),
+                                  ));
+                            },
+                          ),
+                          SizedBox(
                             height: 70,
                           ),
                           SizedBox(
@@ -156,19 +202,29 @@ class ShowForms {
                                       "Error",
                                       "please select the room",
                                     );
+                                  } else if (selectvalueRR.toString() ==
+                                      "null") {
+                                    NotificationDialog.show(
+                                      context,
+                                      "Error",
+                                      "please select the room",
+                                    );
                                   } else {
                                     if (model == null) {
                                       await value.addNewItem(
                                           context,
                                           selectvalue.toString(),
-                                          selectvalueR.toString());
+                                          selectvalueR.toString(),
+                                          selectvalueRR.toString());
                                     } else {
                                       //update the room if model is not null
                                       await value.updateItem(
-                                          context,
-                                          model.id!,
-                                          selectvalue.toString(),
-                                          selectvalueR.toString());
+                                        context,
+                                        model.id!,
+                                        selectvalue.toString(),
+                                        selectvalueR.toString(),
+                                        selectvalueRR.toString(),
+                                      );
                                     }
 
                                     //when update close the bottom sheet

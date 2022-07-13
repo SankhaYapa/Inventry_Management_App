@@ -3,6 +3,7 @@ class ItemModel {
   String iname;
   String? measurement;
   String? room;
+  String? rroom;
   String? quantity;
 
   ItemModel({
@@ -10,6 +11,7 @@ class ItemModel {
     required this.iname,
     required this.measurement,
     required this.room,
+    required this.rroom,
     this.quantity,
   });
 
@@ -18,5 +20,6 @@ class ItemModel {
       iname: json['iname'],
       measurement: json['mesure'],
       room: json['room'],
+      rroom: json['rroom'],
       quantity: json['quantity']);
 }

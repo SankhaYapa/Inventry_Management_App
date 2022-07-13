@@ -42,23 +42,33 @@ class _RoomSceernState extends State<RoomSceern> {
       appBar: AppBar(
         title: Text("Rooms"),
       ),
-      body: Consumer<RoomProvider>(
-        builder: (context, value, child) {
-          return value.allRooms.isEmpty
-              ? Center(child: Text('No Rooms'))
-              : ListView.builder(
-                  padding: EdgeInsets.all(10),
-                  physics: BouncingScrollPhysics(),
-                  itemCount: value.allRooms.length,
-                  itemBuilder: (context, index) => RoomCard(
-                    // rname: value.allRooms[index].rname,
-                    model: value.allRooms[index],
-                  ),
-                );
-        },
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Consumer<RoomProvider>(
+                builder: (context, value, child) {
+                  return value.allRooms.isEmpty
+                      ? Center(child: Text('No Rooms'))
+                      : ListView.builder(
+                          padding: EdgeInsets.all(10),
+                          physics: BouncingScrollPhysics(),
+                          itemCount: value.allRooms.length,
+                          itemBuilder: (context, index) => RoomCard(
+                            // rname: value.allRooms[index].rname,
+                            model: value.allRooms[index],
+                          ),
+                        );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Utils.showForm(context, null),
+        backgroundColor: kpink,
         icon: Icon(Icons.add),
         label: Text('Add Room'),
       ),

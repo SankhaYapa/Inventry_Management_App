@@ -70,26 +70,36 @@ class _ItemsScreenState extends State<ItemsScreen> {
       appBar: AppBar(
         title: Text("Items"),
       ),
-      body: Consumer<ItemProvider>(
-        builder: (context, value, child) {
-          return value.allItems.isEmpty
-              ? Center(child: Text('No Items'))
-              : ListView.builder(
-                  padding: EdgeInsets.all(10),
-                  physics: BouncingScrollPhysics(),
-                  itemCount: value.allItems.length,
-                  itemBuilder: (context, index) => ItemCard(
-                    // rname: value.allRooms[index].rname,
-                    model: value.allItems[index],
-                  ),
-                );
-        },
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Consumer<ItemProvider>(
+                builder: (context, value, child) {
+                  return value.allItems.isEmpty
+                      ? Center(child: Text('No Items'))
+                      : ListView.builder(
+                          padding: EdgeInsets.all(10),
+                          physics: BouncingScrollPhysics(),
+                          itemCount: value.allItems.length,
+                          itemBuilder: (context, index) => ItemCard(
+                            // rname: value.allRooms[index].rname,
+                            model: value.allItems[index],
+                          ),
+                        );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         //onPressed: () => showForm(context, null,),
         onPressed: () {
           ShowForms.showForm(context, null);
         },
+        backgroundColor: kpink,
         icon: Icon(Icons.add),
         label: Text('Add Items'),
       ),
